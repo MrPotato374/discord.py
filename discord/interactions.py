@@ -142,6 +142,7 @@ class Interaction:
             self.message = None
 
         self.user: Optional[Union[User, Member]] = None
+        self.author = self.user
         self._permissions: int = 0
 
         # TODO: there's a potential data loss here
