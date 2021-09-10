@@ -208,6 +208,26 @@ class Interaction:
         }
         return Webhook.from_state(data=payload, state=self._state)
 
+    
+    async def send(self, *args, **kwargs):
+        """|coro|
+        
+        Sends the interaction response.
+        
+        This is equivalent to calling :meth:`InteractionResponse.send_message`.
+        """
+        return await self.response.send_message(*args, **kwargs)
+
+    async def replt(self, *args, **kwargs):
+        """|coro|
+        
+        Sends the interaction response.
+        
+        This is equivalent to calling :meth:`InteractionResponse.send_message`.
+        """
+        return await self.response.send_message(*args, **kwargs)
+
+    
     async def original_message(self) -> InteractionMessage:
         """|coro|
 
