@@ -108,6 +108,7 @@ class Interaction:
         'application_id',
         'message',
         'user',
+        'author',
         'token',
         'version',
         '_permissions',
