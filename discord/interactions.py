@@ -221,7 +221,7 @@ class Interaction:
         """
         return await self.response.send_message(*args, **kwargs)
 
-    async def replt(self, *args, **kwargs):
+    async def reply(self, *args, **kwargs):
         """|coro|
         
         Sends the interaction response.
