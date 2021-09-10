@@ -142,7 +142,7 @@ class Interaction:
             self.message = None
 
         self.user: Optional[Union[User, Member]] = None
-        self.author = self.user
+        self.author: Optional[Union[User, Member]] = None
         self._permissions: int = 0
 
         # TODO: there's a potential data loss here
@@ -154,6 +154,7 @@ class Interaction:
                 pass
             else:
                 self.user = Member(state=self._state, guild=guild, data=member)  # type: ignore
+                self.author = self.user
                 self._permissions = int(member.get('permissions', 0))
         else:
             try:
