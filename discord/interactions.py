@@ -112,6 +112,7 @@ class Interaction:
         'token',
         'version',
         '_permissions',
+        '_raw_data',
         '_state',
         '_session',
         '_original_message',
@@ -124,6 +125,7 @@ class Interaction:
         self._state: ConnectionState = state
         self._session: ClientSession = state.http._HTTPClient__session
         self._original_message: Optional[InteractionMessage] = None
+        self._raw_data = data
         self._from_data(data)
 
     def _from_data(self, data: InteractionPayload):
