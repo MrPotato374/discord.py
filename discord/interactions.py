@@ -484,7 +484,7 @@ class InteractionResponse:
         view: View = MISSING,
         tts: bool = False,
         ephemeral: bool = False,
-    ) -> None:
+    ) -> Optional[Message]:
         """|coro|
 
         Responds to this interaction by sending a message.
@@ -563,6 +563,8 @@ class InteractionResponse:
             self._parent._state.store_view(view)
 
         self._responded = True
+        
+        return self._parent.message
 
     async def edit_message(
         self,
