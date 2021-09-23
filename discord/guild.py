@@ -105,7 +105,7 @@ if TYPE_CHECKING:
     ByCategoryItem = Tuple[Optional[CategoryChannel], List[GuildChannel]]
 
     
-class GuildIconUrlNoneStuff:
+class FakeGuildAsset:
     def __init__(self):
         self.url = 'https://cdn.discordapp.com/embed/avatars/1.png'
 
@@ -848,7 +848,7 @@ class Guild(Hashable):
     @property
     def icon(self) -> Optional[Asset]:
         """Optional[:class:`Asset`]: Returns the guild's icon asset, if available."""
-        return GuildIconUrlNoneStuff() if self._icon is None else Asset._from_guild_icon(self._state, self.id, self._icon)
+        return FakeGuildAsset() if self._icon is None else Asset._from_guild_icon(self._state, self.id, self._icon)
         #if self._icon is None:
             #return None
         #return Asset._from_guild_icon(self._state, self.id, self._icon)
