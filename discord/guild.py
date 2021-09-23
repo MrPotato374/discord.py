@@ -844,9 +844,10 @@ class Guild(Hashable):
     @property
     def icon(self) -> Optional[Asset]:
         """Optional[:class:`Asset`]: Returns the guild's icon asset, if available."""
-        if self._icon is None:
-            return None
-        return Asset._from_guild_icon(self._state, self.id, self._icon)
+        return 'https://cdn.discordapp.com/embed/avatars/1.png' if self._icon is None else Asset._from_guild_icon(self._state, self.id, self._icon)
+        #if self._icon is None:
+            #return None
+        #return Asset._from_guild_icon(self._state, self.id, self._icon)
 
     @property
     def banner(self) -> Optional[Asset]:
