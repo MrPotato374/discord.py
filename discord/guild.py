@@ -104,6 +104,10 @@ if TYPE_CHECKING:
     GuildChannel = Union[VoiceChannel, StageChannel, TextChannel, CategoryChannel, StoreChannel]
     ByCategoryItem = Tuple[Optional[CategoryChannel], List[GuildChannel]]
 
+    
+class GuildIconUrlNoneStuff:
+    def __init__(self):
+        self.url = 'https://cdn.discordapp.com/embed/avatars/1.png'
 
 class BanEntry(NamedTuple):
     reason: Optional[str]
@@ -844,7 +848,7 @@ class Guild(Hashable):
     @property
     def icon(self) -> Optional[Asset]:
         """Optional[:class:`Asset`]: Returns the guild's icon asset, if available."""
-        return 'https://cdn.discordapp.com/embed/avatars/1.png' if self._icon is None else Asset._from_guild_icon(self._state, self.id, self._icon)
+        return GuildIconUrlNoneStuff() if self._icon is None else Asset._from_guild_icon(self._state, self.id, self._icon)
         #if self._icon is None:
             #return None
         #return Asset._from_guild_icon(self._state, self.id, self._icon)
