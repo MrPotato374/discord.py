@@ -29,6 +29,7 @@ from .permissions import Permissions
 from .errors import InvalidArgument
 from .colour import Colour
 from .mixins import Hashable
+from .asset import Asset
 from .utils import snowflake_time, _get_as_snowflake, MISSING
 
 __all__ = (
@@ -175,6 +176,9 @@ class Role(Hashable):
     __slots__ = (
         'id',
         'name',
+        '_icon',
+        'icon',
+        'unicode_emoji',
         '_permissions',
         '_colour',
         'position',
@@ -236,6 +240,8 @@ class Role(Hashable):
 
     def _update(self, data: RolePayload):
         self.name: str = data['name']
+        self._icon: Optional[str] = data.get('icon')
+        self.unicode_emoji: Optional[str] = data.get('unicode_emoji')
         self._permissions: int = int(data.get('permissions', 0))
         self.position: int = data.get('position', 0)
         self._colour: int = data.get('color', 0)
@@ -287,6 +293,13 @@ class Role(Hashable):
         """:class:`Permissions`: Returns the role's permissions."""
         return Permissions(self._permissions)
 
+    @property
+    def icon(self) -> Optional[Asset]:
+        """:class:`Asset`: Returns the role's icon."""
+        if self._icon is not None:
+            return Asset._from_icon(self._state, self.id, self._icon, path='role')
+        return None    
+    
     @property
     def colour(self) -> Colour:
         """:class:`Colour`: Returns the role colour. An alias exists under ``color``."""
