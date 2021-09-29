@@ -1,18 +1,14 @@
 """
 The MIT License (MIT)
-
 Copyright (c) 2015-present Rapptz
-
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
 the rights to use, copy, modify, merge, publish, distribute, sublicense,
 and/or sell copies of the Software, and to permit persons to whom the
 Software is furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -51,15 +47,11 @@ if TYPE_CHECKING:
 
 class RoleTags:
     """Represents tags on a role.
-
     A role tag is a piece of extra information attached to a managed role
     that gives it context for the reason the role is managed.
-
     While this can be accessed, a useful interface is also provided in the
     :class:`Role` and :class:`Guild` classes as well.
-
     .. versionadded:: 1.6
-
     Attributes
     ------------
     bot_id: Optional[:class:`int`]
@@ -107,41 +99,23 @@ R = TypeVar('R', bound='Role')
 
 class Role(Hashable):
     """Represents a Discord role in a :class:`Guild`.
-
     .. container:: operations
-
         .. describe:: x == y
-
             Checks if two roles are equal.
-
         .. describe:: x != y
-
             Checks if two roles are not equal.
-
         .. describe:: x > y
-
             Checks if a role is higher than another in the hierarchy.
-
         .. describe:: x < y
-
             Checks if a role is lower than another in the hierarchy.
-
         .. describe:: x >= y
-
             Checks if a role is higher or equal to another in the hierarchy.
-
         .. describe:: x <= y
-
             Checks if a role is lower or equal to another in the hierarchy.
-
         .. describe:: hash(x)
-
             Return the role's hash.
-
         .. describe:: str(x)
-
             Returns the role's name.
-
     Attributes
     ----------
     id: :class:`int`
@@ -155,15 +129,12 @@ class Role(Hashable):
     position: :class:`int`
         The position of the role. This number is usually positive. The bottom
         role has a position of 0.
-
         .. warning::
-
             Multiple roles can have the same position number. As a consequence
             of this, comparing via role position is prone to subtle bugs if
             checking for role hierarchy. The recommended and correct way to
             compare for roles in the hierarchy is using the comparison
             operators on the role objects themselves.
-
     managed: :class:`bool`
         Indicates if the role is managed by the guild through some form of
         integrations such as Twitch.
@@ -177,7 +148,6 @@ class Role(Hashable):
         'id',
         'name',
         '_icon',
-        'icon',
         'unicode_emoji',
         '_permissions',
         '_colour',
@@ -261,28 +231,24 @@ class Role(Hashable):
 
     def is_bot_managed(self) -> bool:
         """:class:`bool`: Whether the role is associated with a bot.
-
         .. versionadded:: 1.6
         """
         return self.tags is not None and self.tags.is_bot_managed()
 
     def is_premium_subscriber(self) -> bool:
         """:class:`bool`: Whether the role is the premium subscriber, AKA "boost", role for the guild.
-
         .. versionadded:: 1.6
         """
         return self.tags is not None and self.tags.is_premium_subscriber()
 
     def is_integration(self) -> bool:
         """:class:`bool`: Whether the role is managed by an integration.
-
         .. versionadded:: 1.6
         """
         return self.tags is not None and self.tags.is_integration()
 
     def is_assignable(self) -> bool:
         """:class:`bool`: Whether the role is able to be assigned or removed by the bot.
-
         .. versionadded:: 2.0
         """
         me = self.guild.me
@@ -298,8 +264,8 @@ class Role(Hashable):
         """:class:`Asset`: Returns the role's icon."""
         if self._icon is not None:
             return Asset._from_icon(self._state, self.id, self._icon, path='role')
-        return None    
-    
+        return None
+
     @property
     def colour(self) -> Colour:
         """:class:`Colour`: Returns the role colour. An alias exists under ``color``."""
@@ -366,20 +332,14 @@ class Role(Hashable):
         reason: Optional[str] = MISSING,
     ) -> Optional[Role]:
         """|coro|
-
         Edits the role.
-
         You must have the :attr:`~Permissions.manage_roles` permission to
         use this.
-
         All fields are optional.
-
         .. versionchanged:: 1.4
             Can now pass ``int`` to ``colour`` keyword-only parameter.
-
         .. versionchanged:: 2.0
             Edits are no longer in-place, the newly edited role is returned instead.
-
         Parameters
         -----------
         name: :class:`str`
@@ -397,7 +357,6 @@ class Role(Hashable):
             position or it will fail.
         reason: Optional[:class:`str`]
             The reason for editing this role. Shows up on the audit log.
-
         Raises
         -------
         Forbidden
@@ -407,7 +366,6 @@ class Role(Hashable):
         InvalidArgument
             An invalid position was given or the default
             role was asked to be moved.
-
         Returns
         --------
         :class:`Role`
@@ -443,17 +401,13 @@ class Role(Hashable):
 
     async def delete(self, *, reason: Optional[str] = None) -> None:
         """|coro|
-
         Deletes the role.
-
         You must have the :attr:`~Permissions.manage_roles` permission to
         use this.
-
         Parameters
         -----------
         reason: Optional[:class:`str`]
             The reason for deleting this role. Shows up on the audit log.
-
         Raises
         --------
         Forbidden
